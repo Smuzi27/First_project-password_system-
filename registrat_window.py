@@ -1,5 +1,5 @@
 import sqlite3
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QDialog
+from PyQt5.QtWidgets import QWidget
 import regis_info
 from ui_files.register import Ui_RegisterWidget
 
@@ -36,20 +36,20 @@ class RegisterWindow(QWidget, Ui_RegisterWidget):
         if status == 0:
             self.statuslabel.setText("")
             res = cursor.execute("SELECT * FROM registr WHERE login = ?", (login,)).fetchone()
-
             if res:
                 if password == res[2]:
                     self.statuslabel.setText("Login is COMPLETED")
                     regis_info.regis_chek(True, res[0], res[1])
                 else:
                     self.statuslabel.setText("Wrong PASSWORD")
+            else:
+                self.statuslabel.setText("LOGIN NOT found")
         # При status == 1 регистрация
         elif status == 1:
             cursor.execute("SELECT login FROM registr WHERE login = ?", [login])
             if cursor.fetchone() is None:
                 cursor.execute("INSERT INTO registr(login, password) VALUES(?, ?)", (login, password))
                 self.db.commit()
-                self.db.close()
                 self.statuslabel.setText("Registration is COMPLETED")
             else:
                 self.statuslabel.setText("Login is USED")

@@ -92,7 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             elif self.action_stat == 1:
                 # Удаление существующих записей
                 if service == "" or login == "":
-                    self.status_lab.setText("Password and Login are REQUIRED")
+                    self.status_lab.setText("Service and Login are REQUIRED")
                 else:
                     cursor.execute(
                         "SELECT id_user, service, login FROM data WHERE id_user = ? AND service = ? AND login = ?",
