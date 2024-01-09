@@ -21,8 +21,8 @@ class RegisterWindow(QWidget, Ui_RegisterWidget):
         self.reg = 1
         self.regist_or_login()
 
-    #метод авторизации
-    #Чтобы выйти в акаунт нужно зарегистрироваться и после войти в аккаунт
+    # метод авторизации
+    # Чтобы выйти в акаунт нужно зарегистрироваться и после войти в аккаунт
     def regist_or_login(self):
         status = self.reg
         cursor = self.db.cursor()

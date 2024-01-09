@@ -61,7 +61,7 @@ class GeneratWindow(QWidget, Ui_GenerationPass):
     def do_when_password_edit(self):
         self.lineEdit.textEdited.connect(self.set_strenght())
 
-    #вызов всех методов
+    # вызов всех методов
     def method_generate(self):
         self.connect_slider_to_spin()
         self.set_password()
