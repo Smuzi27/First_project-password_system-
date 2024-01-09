@@ -2,6 +2,7 @@ from enum import IntEnum
 from math import log2
 import secrets
 
+
 class StrenghtToEntropy(IntEnum):
     Pathetic = 0
     Weak = 32
@@ -9,13 +10,14 @@ class StrenghtToEntropy(IntEnum):
     Strong = 70
     Excellent = 120
 
-def create_new(length: int, characters: str):
-    return "".join(secrets.choice(characters) for _ in range(length))
+
+def create_new(length, characters):
+    return "".join(secrets.choice(str(characters)) for _ in range(int(length)))
 
 
-def get_entropy(length: int, characters_number: int):
+def get_entropy(length, characters_number):
     try:
-        entropy = length * log2(characters_number)
+        entropy = int(length) * log2(int(characters_number))
     except ValueError:
         return 0.0
     return round(entropy, 2)

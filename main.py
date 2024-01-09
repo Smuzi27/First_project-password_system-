@@ -32,35 +32,42 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.TableButton.clicked.connect(self.save_data)
         self.db_data = sqlite3.connect("database.db")
 
+    # вызов окна регистрации
     def open_main_reg(self):
         self.register_window = RegisterWindow()
         self.register_window.show()
 
+    # вызов окна генерации
     def open_generat(self):
         self.gener_window = GeneratWindow()
         self.gener_window.method_generate()
         self.gener_window.show()
 
+    # метод добавление данных в таблицу
     def add_data_button(self):
         self.action_stat = 0
         self.work_with_data()
 
+    # вставка данных из генератора
     def copy_gen_button(self):
         self.PasswEdit.setText(generate_file.gener_info.generat_password)
 
+    # метод удаление записи из таблицы по логину и сервису
     def dell_data_button(self):
         self.action_stat = 1
         self.work_with_data()
 
+    # Метод отображение данных в таблице
     def show_data(self):
         self.action_stat = 2
         self.work_with_data()
 
+    # Метод сохранения данных файлом
     def save_data(self):
         self.action_stat = 3
         self.work_with_data()
 
-    # функция для работы с базой данных пользователей, выводом данных в таблицу, и сохранения в файл
+    # метод для работы с базой данных пользователей, выводом данных в таблицу, и сохранения в файл
     def work_with_data(self):
         service = self.ServerEdit.text()
         login = self.LoginEdit.text()
@@ -104,7 +111,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                        [reg_id, service, login])
                         self.status_lab.setText("Data DELETED")
                         self.db_data.commit()
-            # Вывод данных в таблицу
             elif self.action_stat == 2 or self.action_stat == 3:
                 promt_ser = self.SearchLine.text()
                 req = f"SELECT service, login, password FROM data WHERE id_user = {reg_id} AND service LIKE '" \
@@ -113,6 +119,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if res is None:
                     self.status_lab.setText("NO data for table")
                 else:
+                    # Отображение данных конкретного пользователся с возможностью поска
                     if self.action_stat == 2:
                         self.tableWidget.setColumnCount(3)
                         self.tableWidget.setHorizontalHeaderLabels(["Service", "Login", "Password"])
@@ -125,7 +132,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                             tab += 1
                         self.tableWidget.resizeColumnsToContents()
                         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
-
+                    # сохранение txt файла с данными отображаемой таблицы
                     elif self.action_stat == 3:
                         file = open(f"info_{reg_log}.txt", "w")
                         for row in res:
