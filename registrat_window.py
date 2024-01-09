@@ -55,3 +55,7 @@ class RegisterWindow(QWidget, Ui_RegisterWidget):
                 self.statuslabel.setText("Registration is COMPLETED")
             else:
                 self.statuslabel.setText("Login is USED")
+
+    # при закрытии закрывается и соединение с бд
+    def closeEvent(self, event):
+        self.db.close()
