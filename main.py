@@ -57,7 +57,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.action_stat = 1
         self.work_with_data()
 
-    # Метод отображение данных в таблице
+    # Метод отображение и обновления данных в таблице
     def show_data(self):
         self.action_stat = 2
         self.work_with_data()
