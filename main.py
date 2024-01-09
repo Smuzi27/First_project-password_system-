@@ -140,6 +140,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                             file.write("\n")
                         file.close()
 
+    # после закрытия закрывается и соединение с бд
+    def closeEvent(self, event):
+        self.db_data.close()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
