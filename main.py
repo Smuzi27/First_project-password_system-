@@ -9,11 +9,11 @@ if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
 import sqlite3
 import sys
 import regis_info
-import gener_info
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QMainWindow, QTableWidgetItem
+import generate_file.gener_info
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from generation_window import GeneratWindow
 from registrat_window import RegisterWindow
-from mainWindow import Ui_MainWindow
+from ui_files.mainWindow import Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -46,7 +46,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.work_with_data()
 
     def copy_gen_button(self):
-        self.PasswEdit.setText(gener_info.generat_password)
+        self.PasswEdit.setText(generate_file.gener_info.generat_password)
 
     def dell_data_button(self):
         self.action_stat = 1
@@ -107,7 +107,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # Вывод данных в таблицу
             elif self.action_stat == 2 or self.action_stat == 3:
                 promt_ser = self.SearchLine.text()
-                req = f"SELECT service, login, password FROM data WHERE id_user = {reg_id} AND service LIKE '{promt_ser}%'"
+                req = f"SELECT service, login, password FROM data WHERE id_user = {reg_id} AND service LIKE '" \
+                      f"{promt_ser}%'"
                 res = cursor.execute(req).fetchall()
                 if res is None:
                     self.status_lab.setText("NO data for table")
