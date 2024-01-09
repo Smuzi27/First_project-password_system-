@@ -2,10 +2,10 @@ import sys
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QDialog
 
-import generate_file/password
+import generate_file.password
 from generat import Ui_GenerationPass
-import button
-import gener_info
+import generate_file.button
+import generate_file.gener_info
 
 
 class GeneratWindow(QWidget, Ui_GenerationPass):
@@ -45,7 +45,6 @@ class GeneratWindow(QWidget, Ui_GenerationPass):
         for bt in button.Characters_Number.items():
             if getattr(self, bt[0]).isChecked():
                 num += bt[1]
-
         return num
 
     def set_strenght(self):

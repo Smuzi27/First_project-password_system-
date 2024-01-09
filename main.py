@@ -124,6 +124,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                             tab += 1
                         self.tableWidget.resizeColumnsToContents()
                         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+
                     elif self.action_stat == 3:
                         file = open(f"info_{reg_log}.txt", "w")
                         for row in res:
