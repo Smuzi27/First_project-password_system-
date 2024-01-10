@@ -10,7 +10,7 @@ import sqlite3
 import sys
 import regis_info
 import generate_file.gener_info
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDialog
 from generation_window import GeneratWindow
 from registrat_window import RegisterWindow
 from ui_files.mainWindow import Ui_MainWindow
@@ -134,7 +134,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
                     # сохранение txt файла с данными отображаемой таблицы
                     elif self.action_stat == 3:
-                        file = open(f"info_{reg_log}.txt", "w")
+                        fname = QFileDialog.getSaveFileName(self, 'Select the path and enter the name of the file to save', f'info_{reg_log}', '*.txt')[0]
+                        file = open(fname, "w")
+                        file.write("service, login, password" + "\n")
                         for row in res:
                             file.write("; ".join(row))
                             file.write("\n")
